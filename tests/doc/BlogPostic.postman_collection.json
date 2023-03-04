@@ -15,12 +15,24 @@
 					"item": [
 						{
 							"name": "Signup User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().data.token);\r",
+											"pm.environment.set(\"user_id\", pm.response.json().data.user._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Admin\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"admin@blogpostic.io\",\r\n    \"password\": \"{{password}}\",\r\n    \"passwordConfirm\": \"{{password}}\"\r\n}",
+									"raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"test.user@blogpostic.io\",\r\n    \"password\": \"{{password}}\",\r\n    \"passwordConfirm\": \"{{password}}\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -28,13 +40,11 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/v1/users/signup",
+									"raw": "{{URL}}{{API}}/users/signup",
 									"host": [
-										"{{URL}}"
+										"{{URL}}{{API}}"
 									],
 									"path": [
-										"api",
-										"v1",
 										"users",
 										"signup"
 									]
@@ -44,6 +54,18 @@
 						},
 						{
 							"name": "Login User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().data.token);\r",
+											"pm.environment.set(\"user_id\", pm.response.json().data.user._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -57,22 +79,211 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/v1/users/login",
+									"raw": "{{URL}}{{API}}/users/login",
 									"host": [
-										"{{URL}}"
+										"{{URL}}{{API}}"
 									],
 									"path": [
-										"api",
-										"v1",
 										"users",
 										"login"
 									]
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Logout User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", \"\");\r",
+											"pm.environment.set(\"user_id\", \"\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/logout",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"logout"
+									]
+								},
+								"description": "Logout a user."
+							},
+							"response": []
 						}
 					],
-					"description": "API user auth tests."
+					"description": "User auth tests."
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get all Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								},
+								"description": "Get data of all users (admin only),"
+							},
+							"response": []
+						},
+						{
+							"name": "Create User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								},
+								"description": "Create a user manually (admin only)."
+							},
+							"response": []
+						},
+						{
+							"name": "Get User by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/{{user_id}}",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								},
+								"description": "Get data of a user (admin only)."
+							},
+							"response": []
+						},
+						{
+							"name": "Update User by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/{{user_id}}",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								},
+								"description": "Update data of a user (admin only).\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/{{user_id}}",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								},
+								"description": "Delete a user (admin only).\n\nEndFragment"
+							},
+							"response": []
+						}
+					],
+					"description": "Admin routes for users."
 				}
 			],
 			"description": "API user tests."

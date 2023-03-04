@@ -49,8 +49,9 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Web-App (own repository)
+# Web-App and API-Wrapper (own repositories)
 vue/
+wrapper/
 
 # TypeScript v1 declaration files
 typings/
