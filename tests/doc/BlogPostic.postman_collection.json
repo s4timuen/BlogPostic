@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "9bd888de-d5e1-4ded-9d06-6f67520372ee",
+		"name": "BlogPostic",
+		"description": "BlogPostic social media platorm API tests.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20713536"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Signup User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Admin\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"admin@blogpostic.io\",\r\n    \"password\": \"{{password}}\",\r\n    \"passwordConfirm\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/users/signup",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@blogpostic.io\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/users/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "API user auth tests."
+				}
+			],
+			"description": "API user tests."
+		},
+		{
+			"name": "Root",
+			"item": [
+				{
+					"name": "Ping API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1"
+							]
+						},
+						"description": "Ping the API, to see if it is available."
+					},
+					"response": []
+				}
+			],
+			"description": "API root test."
+		}
+	]
+}

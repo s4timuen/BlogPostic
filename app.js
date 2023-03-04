@@ -12,7 +12,8 @@ const AppError = require('./utils/app-error.js');
 const errorController = require('./controllers/error-controller');
 const appName = require(__dirname + '/package.json').name;
 
-const viewRouter = require('./routes/view-router');
+const viewsRouter = require('./routers/views-router');
+const userRouter = require('./routers/users-router');
 
 const app = express();
 
@@ -21,7 +22,6 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 ////////// Global Middleware //////////
-
 // serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 // Set security http headers
@@ -91,10 +91,11 @@ const getRoot = (req, res) => {
 
 ////////// Routes //////////
 // Website
-app.use('/', viewRouter);
+app.use('/', viewsRouter);
 // API V1
 app.route('/api/v1')
     .get(getRoot);
+app.use('/api/v1/users', userRouter);
 // Not found
 app.all('*', (req, res, next) => {
     return next(new AppError(`Can not find ${req.originalUrl} on the server`, 404));

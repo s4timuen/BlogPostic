@@ -1,5 +1,5 @@
 {
-  "name": "blogpostic",
+  "name": "BlogPostic",
   "version": "0.1.0",
   "description": "Social media platform that combines blogs and posts.",
   "main": "server.js",
