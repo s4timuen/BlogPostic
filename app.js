@@ -74,9 +74,6 @@ app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
     next();
 });
-// error handling
-app.use(errorController);
-
 
 ////////// Ping API //////////
 const getRoot = (req, res) => {
@@ -101,4 +98,8 @@ app.all('*', (req, res, next) => {
     return next(new AppError(`Can not find ${req.originalUrl} on the server`, 404));
 });
 
+////////// Error Handling //////////
+app.use(errorController);
+
+////////// Export //////////
 module.exports = app;
