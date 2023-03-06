@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -37,6 +38,8 @@ app.use(helmet({
         }
     }
 }));
+// Access-Control-Allow-Origin 
+app.use(cors());
 // limit request rate from same IP
 const limiter = rateLimit({ // requests per hour per IP-Address
     max: 100,
