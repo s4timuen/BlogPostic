@@ -17,6 +17,12 @@ router.route('/logout')
 // protected routes
 router.use(authController.protect);
 
+router.route('/me')
+    .get(
+        userController.getMe,
+        userController.getUser
+    )
+
 // admin routes
 router.use(authController.restrictTo('admin'),);
 
@@ -29,4 +35,5 @@ router.route('/:id')
     .patch(userController.updateUser)
     .delete(userController.deleteUser);
 
+////////// Export //////////
 module.exports = router;
