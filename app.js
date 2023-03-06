@@ -39,7 +39,11 @@ app.use(helmet({
     }
 }));
 // Access-Control-Allow-Origin 
-app.use(cors());
+app.use(cors({
+    origin: [`${process.env.WEB_APP_URL}:${process.env.WEB_APP_PORT}`],
+    credentials: true,
+    exposedHeaders: ['set-cookie']
+}));
 // limit request rate from same IP
 const limiter = rateLimit({ // requests per hour per IP-Address
     max: 100,
