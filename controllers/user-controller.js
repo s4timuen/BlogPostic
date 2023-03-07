@@ -92,7 +92,7 @@ exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
 
 /**
- * Get own user data.
+ * Get own user id.
  */
 exports.getMe = catchAsync(async (req, res, next) => {
     req.params.id = req.user._id;

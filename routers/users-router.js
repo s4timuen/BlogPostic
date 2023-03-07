@@ -14,6 +14,12 @@ router.route('/login')
 router.route('/logout')
     .get(authController.logout);
 
+router.route('/forgot-password')
+    .post(authController.forgotPassword);
+
+router.route('/reset-password/:token')
+    .patch(authController.resetPassword);
+
 // protected routes
 router.use(authController.protect);
 

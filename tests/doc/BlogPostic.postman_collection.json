@@ -14,6 +14,37 @@
 					"name": "Auth",
 					"item": [
 						{
+							"name": "Logout User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", \"\");\r",
+											"pm.environment.set(\"user_id\", \"\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/logout",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"logout"
+									]
+								},
+								"description": "Logout a user."
+							},
+							"response": []
+						},
+						{
 							"name": "Signup User",
 							"event": [
 								{
@@ -92,33 +123,59 @@
 							"response": []
 						},
 						{
-							"name": "Logout User",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.environment.set(\"jwt\", \"\");\r",
-											"pm.environment.set(\"user_id\", \"\");"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
+							"name": "Forgot Password",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@blogpostic.io\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{URL}}{{API}}/users/logout",
+									"raw": "{{URL}}{{API}}/users/forgot-password",
 									"host": [
 										"{{URL}}{{API}}"
 									],
 									"path": [
 										"users",
-										"logout"
+										"forgot-password"
 									]
 								},
-								"description": "Logout a user."
+								"description": "Forgot password endpoint to send a password reset token to a user."
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"{{password_2}}\",\r\n    \"passwordConfirm\": \"{{password_2}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/reset-password/1704b8bc1050ede5d6b05326e93566b8d39fee6dbd04caacc6b104263522adf1",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"reset-password",
+										"1704b8bc1050ede5d6b05326e93566b8d39fee6dbd04caacc6b104263522adf1"
+									]
+								},
+								"description": "Reset password endpoint, requires a valid reset password token as param and a new password and password confirmation as body."
 							},
 							"response": []
 						}

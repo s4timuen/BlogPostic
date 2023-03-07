@@ -25,6 +25,11 @@ JWT_COOKIE_EXPIRES_IN=90
 
 WEB_APP_URL=http://localhost
 WEB_APP_PORT=8081 
+
+EMAIL_HOST=emailhost.io
+EMAIL_PORT=2525
+EMAIL_USERNAME=somename
+EMAIL_PASSWORD=somepassword
 ```
 
 # Start Project
