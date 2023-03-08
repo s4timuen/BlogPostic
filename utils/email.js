@@ -69,9 +69,23 @@ module.exports = class Email {
     }
 
     /**
-     * Send Reset password email.
+     * Send reset password email.
      */
     async sendPasswordReset() {
         await this.send('password-reset', 'Your password reset token (valid for 10 minutes)');
+    }
+
+    /**
+    * Send reactivate user token email.
+    */
+    async sendReactivateUserToken() {
+        await this.send('reactivate-user-token', 'Your reactivate user token (valid for 30 minutes)');
+    }
+
+    /**
+    * Send reactivate user success email.
+    */
+    async sendReactivateUserSuccess() {
+        await this.send('reactivate-user-success', 'Your user account has been successfully reactivated');
     }
 }

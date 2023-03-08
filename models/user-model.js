@@ -52,14 +52,16 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    passwordResetToken: { type: String, },
-    passwordResetExpires: { type: String, },
+    passwordResetToken: { type: String },
+    passwordResetExpires: { type: String },
     active: {
         type: Boolean,
         required: true,
         default: true,
         select: false
     },
+    reactivateUserToken: { type: String },
+    reactivateUserExpires: { type: String },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -90,8 +92,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.pre(/^find/, function (next) {
-    this.find({ active: true })
-        .select('-__v');
+    this.select('-__v');
     next();
 });
 
@@ -111,10 +112,15 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 userSchema.methods.createPasswordResetToken = function () {
     const resetToken = crypto.randomBytes(32).toString('hex');
     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-
     this.passwordResetExpires = Date.now() + 10 * 60 * 100; // 10min
-
     return resetToken;
+}
+
+userSchema.methods.createReactivateUserToken = function () {
+    const reactivateToken = crypto.randomBytes(32).toString('hex');
+    this.reactivateUserToken = crypto.createHash('sha256').update(reactivateToken).digest('hex');
+    this.reactivateUserExpires = Date.now() + 30 * 60 * 100; // 30min
+    return reactivateToken;
 }
 
 ////////// Export //////////

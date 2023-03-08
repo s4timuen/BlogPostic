@@ -393,6 +393,87 @@
 					"name": "User",
 					"item": [
 						{
+							"name": "Reactivate User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/reactivate-user/ab296a9fb13c47722f1f1848e35410e7aa258b9262871925d25503582a2fad27",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"reactivate-user",
+										"ab296a9fb13c47722f1f1848e35410e7aa258b9262871925d25503582a2fad27"
+									]
+								},
+								"description": "Reactivate user by user reactivation token."
+							},
+							"response": []
+						},
+						{
+							"name": "Reactivate User Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test3.user@blogpostic.io\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/reactivate-user",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"reactivate-user"
+									]
+								},
+								"description": "Send reactivate user token."
+							},
+							"response": []
+						},
+						{
+							"name": "Deactivate Me",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/deactivate-me",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"deactivate-me"
+									]
+								},
+								"description": "User deactivates his/her account."
+							},
+							"response": []
+						},
+						{
 							"name": "Delete Me",
 							"request": {
 								"auth": {

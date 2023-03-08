@@ -20,9 +20,11 @@ router.route('/forgot-password')
 router.route('/reset-password/:token')
     .patch(authController.resetPassword);
 
-// TODO: /reactivate-user
+router.route('/reactivate-user')
+    .post(userController.reactivateUserToken);
 
-// TODO: /reactivate-user/:token
+router.route('/reactivate-user/:token')
+    .get(userController.reactivateUser);
 
 // protected routes
 router.use(authController.protect);
@@ -48,7 +50,7 @@ router.route('/delete-me')
 router.use(authController.restrictTo('admin'),);
 
 router.route('/')
-    .get(userController.getAllActiveUsers)
+    .get(userController.getAllUsers)
     .post(userController.createUser);
 
 router.route('/:id')
