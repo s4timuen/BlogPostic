@@ -8,14 +8,12 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'A user must have a first name'],
-        unique: false,
-        trim: true,
+        trim: true
     },
     lastName: {
         type: String,
         required: [true, 'A user must have a last name'],
-        unique: false,
-        trim: true,
+        trim: true
     },
     email: {
         type: String,
@@ -27,56 +25,40 @@ const userSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        default: 'default.jpg',
+        default: 'default.jpg'
     },
     role: {
         type: String,
         enum: ['user', 'admin'],
-        default: 'user',
+        default: 'user'
     },
     password: {
         type: String,
         required: [true, 'A user must have a password'],
-        unique: false,
-        trim: false,
         minLength: [8, 'A Password must have 8 or more characters'],
-        select: false,
+        select: false
     },
     passwordConfirm: {
         type: String,
         required: [true, 'Please confirm your password'],
-        unique: false,
-        trim: false,
         validate: {
             validator: function (val) {
                 return val === this.password; // 'this' only workes here when creating a new document
             },
-            message: 'Password not matching',
-        },
+            message: 'Password not matching'
+        }
     },
     passwordChangedAt: {
         type: Date,
-        default: Date.now(),
-        unique: false,
+        default: Date.now()
     },
-    passwordResetToken: {
-        type: String,
-        required: false,
-        unique: false,
-        trim: false,
-    },
-    passwordResetExpires: {
-        type: String,
-        required: false,
-        unique: false,
-        trim: false,
-    },
+    passwordResetToken: { type: String, },
+    passwordResetExpires: { type: String, },
     active: {
         type: Boolean,
         required: true,
         default: true,
-        unique: false,
-        select: false,
+        select: false
     },
 }, {
     toJSON: { virtuals: true },

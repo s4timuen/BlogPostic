@@ -103,10 +103,31 @@ exports.getMe = catchAsync(async (req, res, next) => {
  * Delete own user.
  */
 exports.deleteMe = catchAsync(async (req, res, next) => {
-    await User.findByIdAndDelete(req.user._id); 
+    await User.findByIdAndDelete(req.user._id);
 
     res.status(200).json({
         status: 'success',
         data: null,
+    });
+});
+
+/**
+ * Deactivate own user.
+ */
+exports.deactivateMe = catchAsync(async (req, res, next) => {
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        { active: false },
+        {
+            new: true,
+            runValidators: true,
+        },
+    ).select('+active');
+    
+    res.status(200).json({
+        status: 'success',
+        data: {
+            user: user,
+        },
     });
 });
