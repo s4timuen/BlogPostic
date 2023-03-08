@@ -165,17 +165,55 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}{{API}}/users/reset-password/1704b8bc1050ede5d6b05326e93566b8d39fee6dbd04caacc6b104263522adf1",
+									"raw": "{{URL}}{{API}}/users/reset-password/481d42513edc6a78e82c3f8f3471f1a7c30121ebad35c40d07477bd40de37f18",
 									"host": [
 										"{{URL}}{{API}}"
 									],
 									"path": [
 										"users",
 										"reset-password",
-										"1704b8bc1050ede5d6b05326e93566b8d39fee6dbd04caacc6b104263522adf1"
+										"481d42513edc6a78e82c3f8f3471f1a7c30121ebad35c40d07477bd40de37f18"
 									]
 								},
 								"description": "Reset password endpoint, requires a valid reset password token as param and a new password and password confirmation as body."
+							},
+							"response": []
+						},
+						{
+							"name": "Update Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"passwordCurrent\": \"{{password}}\",\r\n    \"passwordNew\": \"{{password_2}}\",\r\n    \"passwordConfirm\": \"{{password_2}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/update-password",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"update-password"
+									]
+								},
+								"description": "User updates the password."
 							},
 							"response": []
 						}

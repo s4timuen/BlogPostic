@@ -20,6 +20,10 @@ router.route('/forgot-password')
 router.route('/reset-password/:token')
     .patch(authController.resetPassword);
 
+// TODO: /reactivate-user
+
+// TODO: /reactivate-user/:token
+
 // protected routes
 router.use(authController.protect);
 
@@ -28,6 +32,15 @@ router.route('/me')
         userController.getMe,
         userController.getUser
     )
+
+router.route('/update-password')
+    .patch(authController.updatePassword);
+
+// TODO: /update-my-data
+
+// TODO: /deactivate-me
+
+// TODO: /delete-me
 
 // admin routes
 router.use(authController.restrictTo('admin'),);

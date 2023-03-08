@@ -115,7 +115,6 @@ userSchema.pre(/^find/, function (next) {
 
 ////////// Instance Methods //////////
 userSchema.methods.isPasswordCorrect = async function (candidatePassword, userPassword) {
-    // this.password not available, because 'select: false' on field password
     return await bcrypt.compare(candidatePassword, userPassword);
 }
 
