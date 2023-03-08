@@ -40,7 +40,8 @@ router.route('/update-password')
 
 // TODO: /deactivate-me
 
-// TODO: /delete-me
+router.route('/delete-me')
+    .delete(userController.deleteMe); 
 
 // admin routes
 router.use(authController.restrictTo('admin'),);

@@ -388,6 +388,40 @@
 						}
 					],
 					"description": "Admin routes for users."
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Delete Me",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/users/delete-me",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"delete-me"
+									]
+								},
+								"description": "User deletes his/her own account."
+							},
+							"response": []
+						}
+					]
 				}
 			],
 			"description": "API user tests."

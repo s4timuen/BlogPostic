@@ -61,7 +61,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
         .toFile(`public/img/users/${req.file.filename}`);
-        
+
     next();
 });
 
@@ -97,4 +97,16 @@ exports.deleteUser = factory.deleteOne(User);
 exports.getMe = catchAsync(async (req, res, next) => {
     req.params.id = req.user._id;
     next();
+});
+
+/**
+ * Delete own user.
+ */
+exports.deleteMe = catchAsync(async (req, res, next) => {
+    await User.findByIdAndDelete(req.user._id); 
+
+    res.status(200).json({
+        status: 'success',
+        data: null,
+    });
 });

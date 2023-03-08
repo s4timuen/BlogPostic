@@ -56,7 +56,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     let token = undefined;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
-    } else if (req.cookies.jwt && req.cookies.jwt !== 'logged out') {
+    } else if (req.cookies.jwt && req.cookies.jwt !== 'logged_out') {
         token = req.cookies.jwt;
     }
     if (!token) {
