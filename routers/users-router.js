@@ -38,7 +38,12 @@ router.route('/me')
 router.route('/update-password')
     .patch(authController.updatePassword);
 
-// TODO: /update-my-data
+router.route('/update-my-data')
+    .patch(
+        userController.uploadUserPhoto,
+        userController.resizeUserPhoto,
+        userController.updateMyData
+    );
 
 router.route('/deactivate-me')
     .patch(userController.deactivateMe);

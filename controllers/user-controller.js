@@ -6,6 +6,7 @@ const AppError = require('../utils/app-error');
 const Email = require('../utils/email');
 const catchAsync = require('../utils/catch-async');
 const factory = require('./handlerFactory');
+const { filterObj } = require('../utils/objects');
 
 /**
  * Multer configuration for file upload (user photo)
@@ -25,22 +26,6 @@ const upload = multer(
         fileFilter: multerFilter,
     }
 );
-
-/**
- * Filter ovbject for specific keys. 
- * @param {Object} obj Object to filter.
- * @param  {...string} allowedFields Keys that the object is filetred for
- * @returns {Object} The filetred object
- */
-const filterObj = (obj, ...allowedFields) => {
-    const newObj = {};
-    Object.keys(obj).forEach(key => {
-        if (allowedFields.includes(key)) {
-            newObj[key] = obj[key];
-        }
-    });
-    return newObj;
-}
 
 ////////// Middleware //////////
 /**
@@ -62,7 +47,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
         .resize(500, 500)
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
-        .toFile(`public/img/users/${req.file.filename}`);
+        .toFile(`assets/img/users/${req.file.filename}`);
 
     next();
 });
@@ -129,7 +114,7 @@ exports.deactivateMe = catchAsync(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         data: {
-            user: user,
+            user,
         },
     });
 });
@@ -195,4 +180,36 @@ exports.reactivateUser = catchAsync(async (req, res, next) => {
     } catch (err) {
         return next(new AppError('There was an error sending the email. Try again later.', 500));
     }
+});
+
+/**
+ * Update own data.
+ */
+exports.updateMyData = catchAsync(async (req, res, next) => {
+    // error if user POSTs password data
+    if (req.body.password || req.body.passwordConfirm) {
+        return next(new AppError('This route is not for password updates, please use /update-password', 400));
+    }
+    // filter data for allowed fields only
+    const filteredBody = filterObj(req.body, 'firstName', 'lastName', 'email')
+    // user photo
+    if (req.file) {
+        filteredBody.photo = req.file.filename;
+    }
+    // update user document
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        filteredBody,
+        {
+            new: true,
+            runValidators: true,
+        },
+    );
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            user,
+        },
+    });
 });

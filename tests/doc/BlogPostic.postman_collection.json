@@ -441,6 +441,44 @@
 							"response": []
 						},
 						{
+							"name": "Update User Data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lastName\": \"Testson\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/update-my-data",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"update-my-data"
+									]
+								},
+								"description": "Update users own data."
+							},
+							"response": []
+						},
+						{
 							"name": "Deactivate Me",
 							"request": {
 								"auth": {
