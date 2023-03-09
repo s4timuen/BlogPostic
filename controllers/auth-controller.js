@@ -13,9 +13,9 @@ const catchAsync = require('../utils/catch-async');
  */
 const signToken = id => {
     return jwt.sign(
-        { id: id }, 
-        process.env.JWT_SECRET, 
-        { expiresIn: process.env.JWT_EXPIRES_IN } 
+        { id: id },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 }
 
@@ -140,6 +140,14 @@ exports.logout = catchAsync(async (req, res, next) => {
 });
 
 /**
+ * Get own user id.
+ */
+exports.getMe = catchAsync(async (req, res, next) => {
+    req.params.id = req.user._id;
+    next();
+});
+
+/**
  * Send password reset token to user.
  */
 exports.forgotPassword = catchAsync(async (req, res, next) => {
@@ -153,7 +161,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
     // send email
     // TODO: url to reset password page
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/reset-password/${resetToken}`; 
+    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/reset-password/${resetToken}`;
     try {
         await new Email(user, resetURL).sendPasswordReset();
         res.status(200).json({
