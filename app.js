@@ -15,6 +15,7 @@ const appName = require(__dirname + '/package.json').name;
 
 const viewsRouter = require('./routers/views-router');
 const userRouter = require('./routers/users-router');
+const blogRouter = require('./routers/blogs-router');
 
 const app = express();
 
@@ -100,6 +101,7 @@ app.use('/', viewsRouter);
 app.route('/api/v1')
     .get(getRoot);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/blogs', blogRouter);
 // Not found
 app.all('*', (req, res, next) => {
     return next(new AppError(`Can not find ${req.originalUrl} on the server`, 404));

@@ -79,14 +79,6 @@ exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
 
 /**
- * Get own user id.
- */
-exports.getMe = catchAsync(async (req, res, next) => {
-    req.params.id = req.user._id;
-    next();
-});
-
-/**
  * Delete own user.
  */
 exports.deleteMe = catchAsync(async (req, res, next) => {
@@ -113,9 +105,7 @@ exports.deactivateMe = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        data: {
-            user,
-        },
+        data: { user },
     });
 });
 
@@ -152,9 +142,6 @@ exports.reactivateUserToken = catchAsync(async (req, res, next) => {
  * Reactivate a user.
  */
 exports.reactivateUser = catchAsync(async (req, res, next) => {
-
-    console.log(req.params.token)
-
     // get user by token
     const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
     const user = await User.findOne({
@@ -208,8 +195,6 @@ exports.updateMyData = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        data: {
-            user,
-        },
+        data: { user },
     });
 });

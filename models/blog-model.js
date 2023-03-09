@@ -26,6 +26,10 @@ const blogSchema = new mongoose.Schema({
         required: [true, 'A blog must at least have one tag'],
         min: 1
     },
+    visible: {
+        type: Boolean,
+        default: true
+    },
     lastArticlePosted: {
         type: mongoose.Schema.ObjectId,
         ref: 'Article'
@@ -44,7 +48,29 @@ const blogSchema = new mongoose.Schema({
     id: false
 });
 
-////////// Document middleware //////////
+////////// Indices //////////
+blogSchema.index({ user: 1 }, { unique: true });
+
+////////// Document Middleware //////////
+blogSchema.pre(/^find/, function (next) {
+    // TODO: disable on getAllBlogsUser
+    this.find({ visible: true });
+    next();
+});
+
+blogSchema.pre(/^find/, function (next) {
+    this.select('-__v');
+    next();
+});
+
+////////// Query Middleware //////////
+blogSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'author',
+        select: '-role -passwordChangedAt -email'
+    });
+    next();
+});
 
 ////////// Export //////////
 const Blog = mongoose.model('Blog', blogSchema);

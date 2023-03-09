@@ -31,7 +31,7 @@ router.use(authController.protect);
 
 router.route('/me')
     .get(
-        userController.getMe,
+        authController.getMe,
         userController.getUser
     )
 
