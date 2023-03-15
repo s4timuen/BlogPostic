@@ -16,6 +16,19 @@ exports.getAll = (Model) => catchAsync(async (req, res, next) => {
     });
 });
 
+/** 
+ * Get all elements of a Model, that belong to a user from the DB.
+ */
+exports.getAllOfUser = (Model) => catchAsync(async (req, res, next) => {
+    const documents = await Model.find({ author: req.params.id });
+
+    res.status(200).json({
+        status: 'success',
+        results: documents.length,
+        data: { documents }
+    });
+});
+
 /**
  * Get one element of a Model from the DB.
  */
@@ -85,4 +98,20 @@ exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
     }
 
     res.status(204).send();
+});
+
+/**
+ * Check if document belongs to logged in user.
+ */
+exports.isDocumentOfUser = (Model) => catchAsync(async (req, res, next) => {
+    const document = await Model.findById(req.params.id);
+
+    if (!document) {
+        return next(new AppError(`No document found for ID ${req.params.id}`, 404));
+    }
+
+    if (document.author._id.toString() !== req.user._id.toString()) {
+        return next(new AppError('You have only permission to update or delete your own documents', 403));
+    }
+    next();
 });
