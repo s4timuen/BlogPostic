@@ -5,33 +5,43 @@ const authController = require('../controllers/auth-controller');
 const router = express.Router();
 
 ////////// Routes //////////
+router.route('/blog/:id')
+    .get(blogController.getBlog);
+
 // protected routes
 router.use(authController.protect);
 
-router.route('/my-blogs') // TODO: wrapper 
-    .get(blogController.getAllBlogsUser);
+router.route('/my-blogs')
+    .get(
+        authController.getMe,
+        blogController.getAllBlogsUser
+    );
 
-router.route('/create-blog') // TODO: postman, wrapper 
+router.route('/create-blog')
     .post(blogController.createBlog);
 
-router.route('/update-blog') // TODO: postman, wrapper 
-    .patch(blogController.updateBlog);
+router.route('/update-my-blog/:id')
+    .patch(
+        blogController.isMyBlog,
+        blogController.updateBlog
+    );
 
-router.route('/delete-blog') // TODO: postman, wrapper 
-    .delete(blogController.deleteBlog);
-
-router.route('/:id') // TODO: postman, wrapper 
-    .get(blogController.getBlog);
+router.route('/delete-my-blog/:id')
+    .delete(
+        blogController.isMyBlog,
+        blogController.deleteBlog
+    );
 
 // admin routes
 router.use(authController.restrictTo('admin'),);
 
-router.route('/') // TODO: postman, wrapper 
-    .get(blogController.getAllBlogs)
-    .post(blogController.createBlog);
+router.route('/')
+    .get(blogController.getAllBlogs);
 
-router.route('/:userId') // TODO: postman, wrapper 
+router.route('/user/:id')
     .get(blogController.getAllBlogsUser)
+
+router.route('/blog/:id')
     .patch(blogController.updateBlog)
     .delete(blogController.deleteBlog);
 

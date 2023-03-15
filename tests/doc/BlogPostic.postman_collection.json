@@ -102,7 +102,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"admin@blogpostic.io\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"raw": "{\r\n    \"email\": \"test3.user@blogpostic.io\",\r\n    \"password\": \"{{password}}\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -479,6 +479,45 @@
 							"response": []
 						},
 						{
+							"name": "Update User Photo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/timmu/Documents/Repositories/BlogPostic/assets/img/users/test.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/update-my-data",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"update-my-data"
+									]
+								},
+								"description": "Update users own data."
+							},
+							"response": []
+						},
+						{
 							"name": "Deactivate Me",
 							"request": {
 								"auth": {
@@ -569,6 +608,296 @@
 				}
 			],
 			"description": "API root test."
+		},
+		{
+			"name": "Blogs",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get All Blogs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs"
+									]
+								},
+								"description": "Get all blogs."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Blogs User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/user/640789a9ff84a871bc3c377b",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"user",
+										"640789a9ff84a871bc3c377b"
+									]
+								},
+								"description": "Get all blogs of a user."
+							},
+							"response": []
+						},
+						{
+							"name": "Update Blog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"updated by admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/blog/640a39d0310b668468383a60",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"blog",
+										"640a39d0310b668468383a60"
+									]
+								},
+								"description": "Update a blog."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Blog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/blog/640a39d0310b668468383a60",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"blog",
+										"640a39d0310b668468383a60"
+									]
+								},
+								"description": "Delete a blog."
+							},
+							"response": []
+						}
+					],
+					"description": "Admin routes tests."
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get Blog",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/blog/640a39d0310b668468383a60",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"blog",
+										"640a39d0310b668468383a60"
+									]
+								},
+								"description": "Get a specific blog by ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All My Blogs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/my-blogs",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"my-blogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Blog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"author\": \"640789a9ff84a871bc3c377b\",\r\n    \"title\": \"This is my second Blog\",\r\n    \"description\": \"Some super super exciting description\",\r\n    \"tags\": [\"test\", \"second\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/create-blog",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"create-blog"
+									]
+								},
+								"description": "Create an user blog."
+							},
+							"response": []
+						},
+						{
+							"name": "Update My Blog",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"The Second Blog\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/update-my-blog/6410871c0caef28b1cca8856",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"update-my-blog",
+										"6410871c0caef28b1cca8856"
+									]
+								},
+								"description": "User can update one of his blogs."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete My Blog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/blogs/delete-my-blog/64119e56a0dc8820fcfa69bc",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"blogs",
+										"delete-my-blog",
+										"64119e56a0dc8820fcfa69bc"
+									]
+								},
+								"description": "User can delete one of his blogs."
+							},
+							"response": []
+						}
+					],
+					"description": "User routes tests."
+				}
+			],
+			"description": "API blogs tests."
 		}
 	]
 }

@@ -49,7 +49,7 @@ const blogSchema = new mongoose.Schema({
 });
 
 ////////// Indices //////////
-blogSchema.index({ user: 1 }, { unique: true });
+blogSchema.index({ user: 1 }, { unique: false });
 
 ////////// Document Middleware //////////
 blogSchema.pre(/^find/, function (next) {
