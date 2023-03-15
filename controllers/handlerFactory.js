@@ -1,5 +1,6 @@
 const AppError = require('../utils/app-error');
 const catchAsync = require('../utils/catch-async');
+const { filterObj } = require('../utils/objects');
 
 /**
  * Get all elements of a Model from the DB.
@@ -69,8 +70,9 @@ exports.createOne = (Model) => catchAsync(async (req, res, next) => {
 /**
  * Update one element of a Model from the DB.
  */
-exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
-    const document = await Model.findByIdAndUpdate(req.params.id, req.body, {
+exports.updateOne = (Model, fields) => catchAsync(async (req, res, next) => {
+    const filteredObject = filterObj(req.body, ...fields);
+    const document = await Model.findByIdAndUpdate(req.params.id, filteredObject, {
         new: true,
         runValidators: true,
     });
