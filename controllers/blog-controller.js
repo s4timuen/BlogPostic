@@ -25,7 +25,7 @@ exports.createBlog = factory.createOne(Blog);
 /**
  * Update a blog.
  */
-exports.updateBlog = factory.updateOne(Blog, ['title','description', 'tags']);
+exports.updateBlog = factory.updateOne(Blog, ['title','description', 'tags', 'visible']);
 
 /**
  * Delete a blog.
@@ -36,6 +36,3 @@ exports.deleteBlog = factory.deleteOne(Blog);
  * Check if blog belongs to logged in user.
  */
 exports.isMyBlog = factory.isDocumentOfUser(Blog);
-
-// TODO: hide Blog -> factory
-// TODO: show Blog -> factory

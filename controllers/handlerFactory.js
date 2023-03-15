@@ -111,7 +111,6 @@ exports.isDocumentOfUser = (Model) => catchAsync(async (req, res, next) => {
     if (!document) {
         return next(new AppError(`No document found for ID ${req.params.id}`, 404));
     }
-
     if (document.author._id.toString() !== req.user._id.toString()) {
         return next(new AppError('You have only permission to update or delete your own documents', 403));
     }
