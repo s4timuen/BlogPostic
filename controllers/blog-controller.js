@@ -1,6 +1,4 @@
 const Blog = require('../models/blog-model');
-const AppError = require('../utils/app-error');
-const catchAsync = require('../utils/catch-async');
 const factory = require('./handlerFactory');
 
 ////////// Controllers //////////
