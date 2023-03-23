@@ -30,6 +30,10 @@ const blogSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    public: {
+        type: Boolean,
+        default: true
+    },
     lastArticlePosted: {
         type: mongoose.Schema.ObjectId,
         ref: 'Article'
@@ -52,12 +56,6 @@ const blogSchema = new mongoose.Schema({
 blogSchema.index({ user: 1 }, { unique: false });
 
 ////////// Document Middleware //////////
-blogSchema.pre(/^find/, function (next) {
-    // TODO: disable on getAllBlogsUser
-    this.find({ visible: true });
-    next();
-});
-
 blogSchema.pre(/^find/, function (next) {
     this.select('-__v');
     next();

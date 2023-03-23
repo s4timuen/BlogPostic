@@ -6,7 +6,12 @@ const router = express.Router();
 
 ////////// Routes //////////
 router.route('/blog/:id')
-    .get(blogController.getBlog);
+    .get(
+        authController.isLoggedIn, 
+        blogController.isBlogVisible,
+        blogController.isBlogPublic,
+        blogController.getBlog
+    );
 
 // protected routes
 router.use(authController.protect);
