@@ -16,6 +16,7 @@ const appName = require(__dirname + '/package.json').name;
 const viewsRouter = require('./routers/views-router');
 const userRouter = require('./routers/users-router');
 const blogRouter = require('./routers/blogs-router');
+const articleRouter = require('./routers/articles-router');
 
 const app = express();
 
@@ -46,7 +47,7 @@ app.use(cors({
     exposedHeaders: ['set-cookie']
 }));
 // limit request rate from same IP
-const limiter = rateLimit({ // requests per hour per IP-Address
+const limiter = rateLimit({ 
     max: 100,
     windowMs: 1000 * 60,
     message: 'Too many requests from this IP, please try again later',
@@ -68,13 +69,9 @@ app.use(mongoSanitize());
 app.use(xss());
 // prevent parameter polution
 app.use(hpp({
-    whitelist: [
-        'duration',
-        'ratingQuantity',
-        'ratingAverage',
-        'difficulty',
-        'price',
-        'maxGroupSize',
+    whitelist: [ // TODO: wrong params
+        'token',
+        'id'
     ],
 }));
 // use ISO time format
@@ -102,6 +99,7 @@ app.route('/api/v1')
     .get(getRoot);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/blogs', blogRouter);
+app.use('/api/v1/articles', articleRouter);
 // Not found
 app.all('*', (req, res, next) => {
     return next(new AppError(`Can not find ${req.originalUrl} on the server`, 404));
