@@ -1,5 +1,6 @@
 const express = require('express');
 const articleController = require('../controllers/article-controller');
+const blogController = require('../controllers/blog-controller');
 const authController = require('../controllers/auth-controller');
 
 const router = express.Router();
@@ -23,7 +24,11 @@ router.route('/my-articles')
     );
 
 router.route('/')
-    .post(articleController.createArticle);
+    .post(
+        articleController.getBlog,
+        blogController.isMyBlog,
+        articleController.createArticle
+    ); 
 
 router.route('/update-my-article/:id')
     .patch(

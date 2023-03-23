@@ -1,4 +1,5 @@
 const Article = require('../models/article-model');
+const catchAsync = require('../utils/catch-async');
 const factory = require('./handlerFactory');
 
 ////////// Controllers //////////
@@ -27,7 +28,7 @@ exports.createArticle = factory.createOne(Article);
  */
 exports.updateArticle = factory.updateOne(
     Article,
-    ['blog', 'title', 'content', 'tags', 'visible', 'attachements', 'attachementsMimeTypes', 'links']
+    ['title', 'content', 'tags', 'visible', 'attachements', 'attachementsMimeTypes', 'links']
 );
 
 /**
@@ -49,3 +50,11 @@ exports.isArticlePublic = factory.isDocumentPublic(Article);
  * Check if article is visible.
  */
 exports.isArticleVisible = factory.isDocumentVisible(Article);
+
+/**
+ * Check if user is posting an article to his/her own blog.
+ */
+exports.getBlog = catchAsync(async (req, res, next) => {
+    req.params.id = req.body.blog;
+    next();
+});
