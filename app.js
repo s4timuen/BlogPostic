@@ -69,7 +69,7 @@ app.use(mongoSanitize());
 app.use(xss());
 // prevent parameter polution
 app.use(hpp({
-    whitelist: [ // TODO: wrong params
+    whitelist: [ 
         'token',
         'id'
     ],

@@ -91,6 +91,31 @@ exports.restrictTo = (...roles) => {
     }
 }
 
+/**
+ * Check if user is logged in.
+ */
+exports.isLoggedIn = async (req, res, next) => { // no catchAsync or logout will trigger an error
+    try {
+        // verify token
+        if (req.cookies.jwt) {
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+            // check user still exists
+            const currentUser = await User.findById(decoded.id);
+            if (!currentUser) {
+                return next();
+            }
+            // check user changed password after token was issued
+            if (currentUser.changedPasswordAfter(decoded.iat)) {
+                return next();
+            }
+            res.locals.user = currentUser;
+        }
+    } catch (err) {
+        return next();
+    }
+    next();
+};
+
 ////////// Controllers //////////
 /**
  * Sign up a user.
