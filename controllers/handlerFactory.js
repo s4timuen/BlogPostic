@@ -120,7 +120,6 @@ exports.isDocumentOfUser = (Model) => catchAsync(async (req, res, next) => {
  * Add check for public to reqest query.
  */
 exports.isDocumentPublic = (Model) => catchAsync(async (req, res, next) => {
-    // err if not logged in 
     const document = await Model.findById(req.params.id);
 
     if (document) {
@@ -135,17 +134,11 @@ exports.isDocumentPublic = (Model) => catchAsync(async (req, res, next) => {
  * Add check for visible to reqest query.
  */
 exports.isDocumentVisible = (Model) => catchAsync(async (req, res, next) => {
-    // err if not user === author
     const document = await Model.findById(req.params.id);
-
-    console.log(document.author)
-    console.log(req.cookies.jwt) 
-    console.log(res.locals.user)
 
     if (document && res.locals.user) {
         const isSameUser = res.locals.user._id.toString() === document.author.toString() ? true : false;
-console.log(isSameUser)
-console.log(!document.visible && isSameUser)
+
         if (!document.visible && !isSameUser) {
             return next(new AppError(`Document with ID ${req.params.id} is not visible`, 403));
         }
