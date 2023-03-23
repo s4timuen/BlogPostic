@@ -44,7 +44,6 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
     if (!document) {
         return next(new AppError(`No document found for ID ${req.params.id}`, 404));
     }
-
     res.status(200).json({
         status: 'success',
         data: {
@@ -54,7 +53,7 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
 });
 
 /**
- * Create one element of a Model from the DB.
+ * Create one element of a Model in the DB.
  */
 exports.createOne = (Model) => catchAsync(async (req, res, next) => {
     const document = await Model.create(req.body);
@@ -113,6 +112,43 @@ exports.isDocumentOfUser = (Model) => catchAsync(async (req, res, next) => {
     }
     if (document.author._id.toString() !== req.user._id.toString()) {
         return next(new AppError('You have only permission to update or delete your own documents', 403));
+    }
+    next();
+});
+
+/**
+ * Add check for public to reqest query.
+ */
+exports.isDocumentPublic = (Model) => catchAsync(async (req, res, next) => {
+    // err if not logged in 
+    const document = await Model.findById(req.params.id);
+
+    if (document) {
+        if (!document.public && !res.locals.user) {
+            return next(new AppError(`Document with ID ${req.params.id} is not public`, 403));
+        }
+    }
+    next();
+});
+
+/**
+ * Add check for visible to reqest query.
+ */
+exports.isDocumentVisible = (Model) => catchAsync(async (req, res, next) => {
+    // err if not user === author
+    const document = await Model.findById(req.params.id);
+
+    console.log(document.author)
+    console.log(req.cookies.jwt) 
+    console.log(res.locals.user)
+
+    if (document && res.locals.user) {
+        const isSameUser = res.locals.user._id.toString() === document.author.toString() ? true : false;
+console.log(isSameUser)
+console.log(!document.visible && isSameUser)
+        if (!document.visible && !isSameUser) {
+            return next(new AppError(`Document with ID ${req.params.id} is not visible`, 403));
+        }
     }
     next();
 });
