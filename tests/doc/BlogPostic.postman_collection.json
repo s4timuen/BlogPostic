@@ -754,14 +754,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{URL}}{{API}}/blogs/blog/640a39d0310b668468383a60",
+									"raw": "{{URL}}{{API}}/blogs/blog/6411db5b3c969d54c88864d5",
 									"host": [
 										"{{URL}}{{API}}"
 									],
 									"path": [
 										"blogs",
 										"blog",
-										"640a39d0310b668468383a60"
+										"6411db5b3c969d54c88864d5"
 									]
 								},
 								"description": "Get a specific blog by ID."
@@ -792,7 +792,8 @@
 										"blogs",
 										"my-blogs"
 									]
-								}
+								},
+								"description": "Get all my blogs."
 							},
 							"response": []
 						},
@@ -898,6 +899,306 @@
 				}
 			],
 			"description": "API blogs tests."
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get All Articles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles"
+									]
+								},
+								"description": "Get all articles."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Articles User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/user/640789a9ff84a871bc3c377b",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"user",
+										"640789a9ff84a871bc3c377b"
+									]
+								},
+								"description": "Get all articles of a user."
+							},
+							"response": []
+						},
+						{
+							"name": "Update Article",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"some new content\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/article/",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"article",
+										""
+									]
+								},
+								"description": "Update an article."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Article",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/article/641c0e8f4fa401323cdae181",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"article",
+										"641c0e8f4fa401323cdae181"
+									]
+								},
+								"description": "Delete an article."
+							},
+							"response": []
+						}
+					],
+					"description": "Admin routes tests."
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get Article",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/article/64196f5c315082637816c2eb",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"article",
+										"64196f5c315082637816c2eb"
+									]
+								},
+								"description": "Get a specific article by ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Get My Aricles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/my-articles",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"my-articles"
+									]
+								},
+								"description": "Get all my articles."
+							},
+							"response": []
+						},
+						{
+							"name": "Create Article",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"author\": \"640789a9ff84a871bc3c377b\",\r\n    \"blog\": \"6411db5b3c969d54c88864d5\",\r\n    \"title\": \"test article 4\",\r\n    \"content\": \"some new article\",\r\n    \"tags\": [\"test\", \"yay\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/articles",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles"
+									]
+								},
+								"description": "Create an article."
+							},
+							"response": []
+						},
+						{
+							"name": "Update My Article",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"some new content 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/update-my-article/641c0c2b0e0dc62b040a790f",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"update-my-article",
+										"641c0c2b0e0dc62b040a790f"
+									]
+								},
+								"description": "Update an article."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete My Article",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/articles/delete-my-article/641c0ee9556cae4748db69f3",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"articles",
+										"delete-my-article",
+										"641c0ee9556cae4748db69f3"
+									]
+								},
+								"description": "Delete an article."
+							},
+							"response": []
+						}
+					],
+					"description": "User routes tests."
+				}
+			],
+			"description": "API articles tests."
 		}
 	]
 }
