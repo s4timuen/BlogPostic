@@ -50,7 +50,8 @@ const postSchema = new mongoose.Schema({
     id: false
 });
 
-////////// Document middleware //////////
+////////// Indices //////////
+postSchema.index({ user: 1 }, { unique: false });
 
 ////////// Export //////////
 const Post = mongoose.model('Post', postSchema);

@@ -123,6 +123,45 @@
 							"response": []
 						},
 						{
+							"name": "Login Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"jwt\", pm.response.json().data.token);\r",
+											"pm.environment.set(\"user_id\", pm.response.json().data.user._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@blogpostic.io\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/users/login",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Forgot Password",
 							"request": {
 								"method": "POST",
@@ -981,7 +1020,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"some new content\"\r\n}",
+									"raw": "{\r\n    \"content\": \"test\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -989,14 +1028,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}{{API}}/articles/article/",
+									"raw": "{{URL}}{{API}}/articles/article/64196f3a315082637816c2d9",
 									"host": [
 										"{{URL}}{{API}}"
 									],
 									"path": [
 										"articles",
 										"article",
-										""
+										"64196f3a315082637816c2d9"
 									]
 								},
 								"description": "Update an article."
@@ -1160,7 +1199,7 @@
 										"641c0c2b0e0dc62b040a790f"
 									]
 								},
-								"description": "Update an article."
+								"description": "Update one of my article."
 							},
 							"response": []
 						},
@@ -1190,7 +1229,7 @@
 										"641c0ee9556cae4748db69f3"
 									]
 								},
-								"description": "Delete an article."
+								"description": "Delete one of my article."
 							},
 							"response": []
 						}
@@ -1199,6 +1238,316 @@
 				}
 			],
 			"description": "API articles tests."
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/post/641d6a346038a35540ab3dac",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"post",
+										"641d6a346038a35540ab3dac"
+									]
+								},
+								"description": "Get a specific post by ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Get My Posts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/my-posts",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"my-posts"
+									]
+								},
+								"description": "Get all my posts."
+							},
+							"response": []
+						},
+						{
+							"name": "Create Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"author\": \"64078817281ce367e07084cf\",\r\n    \"title\": \"my first post\",\r\n    \"content\": \"this is my super awesome first post\",\r\n    \"tags\": [\"first\", \"awesome\"] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/posts",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts"
+									]
+								},
+								"description": "Create a post."
+							},
+							"response": []
+						},
+						{
+							"name": "Update My Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"my first post - edit\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/update-my-post/641d6a346038a35540ab3dac",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"update-my-post",
+										"641d6a346038a35540ab3dac"
+									]
+								},
+								"description": "Update one of my posts."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete My Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/delete-my-post/641d6a3d6038a35540ab3daf",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"delete-my-post",
+										"641d6a3d6038a35540ab3daf"
+									]
+								},
+								"description": "Delete one of my posts."
+							},
+							"response": []
+						}
+					],
+					"description": "User routes tests."
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get All Posts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts"
+									]
+								},
+								"description": "Get all posts."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Posts User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/user/640789a9ff84a871bc3c377b",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"user",
+										"640789a9ff84a871bc3c377b"
+									]
+								},
+								"description": "Get all posts of a user."
+							},
+							"response": []
+						},
+						{
+							"name": "Update Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"my first post - edited by admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/post/641d6b3f47d16921ac413d76",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"post",
+										"641d6b3f47d16921ac413d76"
+									]
+								},
+								"description": "Update a post."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}{{API}}/posts/post/641d6b3f47d16921ac413d76",
+									"host": [
+										"{{URL}}{{API}}"
+									],
+									"path": [
+										"posts",
+										"post",
+										"641d6b3f47d16921ac413d76"
+									]
+								},
+								"description": "Delete a post."
+							},
+							"response": []
+						}
+					],
+					"description": "Admin routes tests."
+				}
+			],
+			"description": "API posts tests."
 		}
 	]
 }

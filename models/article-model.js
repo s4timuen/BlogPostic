@@ -78,6 +78,7 @@ articleSchema.post('save', function () {
 articleSchema.post('save', function () {
     mongoose.model('Article').setLastArticlePosted(this.blog)
 });
+
 ////////// Query Middleware //////////
 
 // calculate articles count for blog after delete article
