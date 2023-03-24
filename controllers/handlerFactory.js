@@ -1,4 +1,5 @@
 const AppError = require('../utils/app-error');
+const APIFeatures = require('../utils/api-features');
 const catchAsync = require('../utils/catch-async');
 const { filterObj } = require('../utils/objects');
 
@@ -6,7 +7,13 @@ const { filterObj } = require('../utils/objects');
  * Get all elements of a Model from the DB.
  */
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
-    const document = await Model.find();
+    const features = await new APIFeatures(Model.find(), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate(Model);
+
+    const document = await features.query;
 
     res.status(200).json({
         status: 'success',
@@ -26,7 +33,7 @@ exports.getAllOfUser = (Model) => catchAsync(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         results: documents.length,
-        data: { documents }
+        data: { data: documents }
     });
 });
 

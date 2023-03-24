@@ -70,8 +70,13 @@ app.use(xss());
 // prevent parameter polution
 app.use(hpp({
     whitelist: [ 
-        'token',
-        'id'
+        'author',
+        'blog',
+        'createdAt',
+        'tags',
+        'likesCount',
+        'articlesCount',
+        'direktCommentsCount'
     ],
 }));
 // use ISO time format
