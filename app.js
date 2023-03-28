@@ -18,6 +18,7 @@ const userRouter = require('./routers/users-router');
 const blogRouter = require('./routers/blogs-router');
 const articleRouter = require('./routers/articles-router');
 const postRouter = require('./routers/posts-router');
+const commentRouter = require('./routers/comments-router');
 
 const app = express();
 
@@ -107,6 +108,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/blogs', blogRouter);
 app.use('/api/v1/articles', articleRouter);
 app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/comments', commentRouter);
 // Not found
 app.all('*', (req, res, next) => {
     return next(new AppError(`Can not find ${req.originalUrl} on the server`, 404));
