@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const i18n = require('i18n-express');
 
 const AppError = require('./utils/app-error.js');
 const errorController = require('./controllers/error-controller');
@@ -80,6 +81,15 @@ app.use(hpp({
         'articlesCount',
         'direktCommentsCount'
     ],
+}));
+// i18n
+app.use(i18n({ // TODO: fix 
+    translationsPath: path.join(__dirname, 'public/i18n'),
+    browserEnable: true,
+    defaultLang: 'en',
+    paramLangName: 'clang',
+    siteLangs: ['en', 'de'],
+    textsVarName: 'i18n' 
 }));
 // use ISO time format
 app.use((req, res, next) => {
