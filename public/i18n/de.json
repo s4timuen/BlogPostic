@@ -1,3 +1,25 @@
 {
-    "HOME_TITLE": "Willkommen bei BlocPostic!"
+    "HOME": "Home",
+    "HOME_TITLE": "Willkommen bei BlocPostic!",
+    "HOME_TITLE_DESCRIPTION": "Was ist BlogPostig?",
+    "HOME_TITLE_FEATURES": "Features",
+    "HOME_TITLE_JOIN": "Wie tritt man bei?",
+    "ABOUT": "Über",
+    "ABOUT_TITLE": "Über BlogPostig",
+    "RESET_PASSWORD_TITLE": "Passwort zurücksetzen",
+    "MAIL_PASSWORD_RESET_TEXT": "Haben Sie Ihr Passwort vergessen? Senden Sie eine PATCH-Anfrage mit Ihrem neuen Passwort und dem bestätigten Passwort an:",
+    "MAIL_PASSWORD_RESET_IGNORE": "Wenn Sie Ihr Passwort nicht vergessen haben, ignorieren Sie bitte diese E-Mail.",
+    "MAIL_PASSWORD_RESET_LINK": "Setzte Sie Passwort zurück",
+    "MAIL_REACTIVATE_USER_SUCCESS": "Ihr Benutzerkonto wurde erfolgreich reaktiviert!",
+    "MAIL_REACTIVATE_USER_TEXT": "Sie möchten Ihr Benutzerkonto reaktivieren? Senden Sie eine GET-Anfrage an:",
+    "MAIL_REACTIVATE_USER_LINK": "Reaktivieren Sie Ihr Benutzerkonto",
+    "MAIL_REACTIVATE_USER_IGNORE": "Wenn Sie Ihr Benutzerkonto nicht reaktivieren möchten, ignorieren Sie bitte diese E-Mail.",
+    "MAIL_WELLCOME_TEXT": "Willkommen bei BlogPostic, wir freuen uns, dass Sie hier sind!",
+    "MAIL_FOOTER_UNSUBSCRIBE_TEXT": "Mögen Sie diese E-Mails nicht?",
+    "MAIL_FOOTER_UNSUBSCRIBE_LINK": "Abbestellen",
+    "BUTTON_REGISTER": "Registrieren",
+    "WEB_APP": "Web-App",
+    "GREETING": "Hey",
+    "PLACEHOLDER": "Platzhalter",
+    "LOREM_IPSUM": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 }

@@ -6,7 +6,7 @@ html
         meta(name='viewport', content='width=device-width')
         meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
         style 
-            include style.css
+            include email-styles.css
         title= subject
 
     body
@@ -38,6 +38,6 @@ html
                                             td.content-block
                                                 span.apple-link BlogPostic, Some Road, Some City
                                                 br
-                                                |  Don't like these emails? 
+                                                |   #{i18n.MAIL_FOOTER_UNSUBSCRIBE_TEXT}
                                                 //- TODO: implement unsubscribe endpoint
-                                                a(href='#') Unsubscribe  
+                                                a(href='#') #{i18n.MAIL_FOOTER_UNSUBSCRIBE_LINK}

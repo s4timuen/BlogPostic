@@ -1,5 +1,5 @@
 extends base-email
 
 block content 
-    p Hi #{fullName},
-    p Your user account has been successfully reactivated!
+    p #{i18n.GREETING} #{fullName},
+    p #{i18n.MAIL_REACTIVATE_USER_SUCCESS}

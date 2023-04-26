@@ -1,3 +1,25 @@
 {
-    "HOME_TITLE": "Welcome to BlocPostic!"
+    "HOME": "Home",
+    "HOME_TITLE": "Welcome to BlocPostic!",
+    "HOME_TITLE_DESCRIPTION": "What is BlogPostig?",
+    "HOME_TITLE_FEATURES": "Features",
+    "HOME_TITLE_JOIN": "How to join?",
+    "ABOUT": "About",
+    "ABOUT_TITLE": "About BlogPostig",
+    "RESET_PASSWORD_TITLE": "Reset Password",
+    "MAIL_PASSWORD_RESET_TEXT": "Forgot your password? Send a PATCH request with your new password and confirmed password to:",
+    "MAIL_PASSWORD_RESET_IGNORE": "If you did not forget your password, please ignore this email.",
+    "MAIL_PASSWORD_RESET_LINK": "Reset your password",
+    "MAIL_REACTIVATE_USER_SUCCESS": "Your user account has been successfully reactivated!",
+    "MAIL_REACTIVATE_USER_TEXT": "You want to reactivate your user account? Send a GET request to:",
+    "MAIL_REACTIVATE_USER_LINK": "Reactivate your user account",
+    "MAIL_REACTIVATE_USER_IGNORE": "If you did not want to reactivate your user account, please ignore this email.",
+    "MAIL_WELLCOME_TEXT": "Welcome to BlogPostic, we're glad to have you!",
+    "MAIL_FOOTER_UNSUBSCRIBE_TEXT": "Don't like these emails?",
+    "MAIL_FOOTER_UNSUBSCRIBE_LINK": "Unsubscribe",
+    "BUTTON_REGISTER": "Register",
+    "WEB_APP": "Web-App",
+    "GREETING": "Hi",
+    "PLACEHOLDER": "Placeholder",
+    "LOREM_IPSUM": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 }

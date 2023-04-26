@@ -1,8 +1,8 @@
 extends base-email
 
 block content 
-    p Hi #{fullName},
-    p You want to reactivate your user account? Send a GET request to: #{url}. 
+    p #{i18n.GREETING} #{fullName},
+    p #{i18n.MAIL_REACTIVATE_USER_TEXT} #{url}. 
     table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
         tbody
             tr
@@ -11,5 +11,6 @@ block content
                         tbody
                             tr
                                 td
-                                    a(href=`${url}`, target='_blank') Reactivate your user account
-    p If you did not want to reactivate your user account, please ignore this email.
+                                    a(href=`${url}`, target='_blank') #{i18n.MAIL_REACTIVATE_USER_LINK}
+    p #{i18n.MAIL_REACTIVATE_USER_IGNORE}
+    
